@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Clinic CMS — Doctor</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* small extra styles for doctor details panel */
+    .detail-panel { display:flex;flex-direction:column;gap:8px; }
+    .detail-panel .field { display:flex;gap:8px;align-items:center }
+    .detail-panel label { width:110px;color:var(--muted);font-size:14px }
+    .prescription-area textarea { min-height:100px; }
+    .split { display:grid; grid-template-columns: 1fr 420px; gap:20px; max-width:1100px; margin:26px auto; padding:0 16px; }
+    @media (max-width:980px){ .split{ grid-template-columns: 1fr } .detail-panel{order:2} .list-panel{order:1} }
+  </style>
+</head>
+<body>
+ <header class="topbar">
+  <div class="brand">
+    <h1>Clinic CMS — Doctor</h1>
+    <p class="subtitle">View patients • Add prescriptions • Review history</p>
+  </div>
+
+  <div class="userbox">
+    <span class="email" id="userEmail">doctor@cms.com</span>
+    <button id="logoutBtn">Logout</button>
+  </div>
+</header>
+
+
+  <main class="split">
+    <section class="panel list-panel">
+      <h2>Patient Queue</h2>
+      <div class="controls">
+        <label>Filter:
+          <select id="filterStatus">
+            <option value="all">All</option>
+            <option value="waiting">Waiting</option>
+            <option value="called">Called</option>
+            <option value="checked">Checked</option>
+          </select>
+        </label>
+        <input id="searchBox" placeholder="Search name or token" />
+      </div>
+
+      <table id="queueTable" class="queue">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Patient</th>
+            <th>Age</th>
+            <th>Contact</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="queueBody">
+        </tbody>
+      </table>
+      <p id="noRecords" class="muted">No patients yet.</p>
+    </section>
+
+    <aside class="panel detail-panel" id="detailPanel">
+      <h2>Patient Details</h2>
+      <div id="noSelection" class="muted">Select a patient from the list to view details and add prescription.</div>
+
+      <div id="patientDetails" style="display:none">
+        <div class="field"><label>Token</label><div id="d_token"></div></div>
+        <div class="field"><label>Name</label><div id="d_name"></div></div>
+        <div class="field"><label>Age</label><div id="d_age"></div></div>
+        <div class="field"><label>Contact</label><div id="d_contact"></div></div>
+        <div class="field"><label>Reason</label><div id="d_reason"></div></div>
+
+        <hr/>
+
+        <h3>Add Prescription</h3>
+        <div class="prescription-area">
+          <label for="medicine">Medicine (comma separated)</label>
+          <input id="medicine" placeholder="e.g., Paracetamol 500mg — 1 tab twice daily" />
+          <label for="notes">Notes / Instructions</label>
+          <textarea id="notes" placeholder="Any specific instructions..."></textarea>
+          <div style="display:flex;gap:8px">
+            <button id="savePrescription" class="btn">Save Prescription</button>
+            <button id="markChecked" class="secondary">Mark Checked</button>
+          </div>
+        </div>
+
+        <hr/>
+
+        <h3>Patient History</h3>
+        <div id="historyList" style="max-height:220px;overflow:auto;"></div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <small>Clinic CMS • Doctor • Built with HTML/CSS/JS & Firebase</small>
+  </footer>
+
+  <!-- Firebase (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/doctor.js"></script>
+
+  <script>
+    // auth UI helpers
+    const auth = firebase.auth();
+    const userEmailEl = document.getElementById('userEmail');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        userEmailEl.textContent = user.email || 'Signed in';
+      } else {
+        window.location.href = 'index.html';
+      }
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      auth.signOut().then(()=> window.location.href='index.html');
+    });
+  </script>
+</body>
+</html>

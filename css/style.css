@@ -1,0 +1,545 @@
+/* =========================================================
+   CLINIC MANAGEMENT SYSTEM (CMS)
+   FULL PROFESSIONAL CSS — Login + Doctor + Receptionist
+   Author: Eproneer
+   ========================================================= */
+
+/* ---------- Base Variables ---------- */
+:root {
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --text: #0b1320;
+  --accent: #0b78d1;
+  --accent-2: #2fa0e6;
+  --success: #0f9d58;
+  --danger: #d9534f;
+  --shadow-sm: 0 6px 18px rgba(12,24,60,0.06);
+  --shadow-md: 0 12px 34px rgba(12,24,60,0.08);
+  --radius-lg: 12px;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- Reset ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  background: linear-gradient(180deg, var(--bg), #ffffff);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+/* =========================================================
+   HEADER / TOPBAR
+   ========================================================= */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #fff;
+  padding: 18px 20px;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.topbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.topbar h1 {
+  font-size: 20px;
+  font-weight: 600;
+}
+.subtitle {
+  font-size: 13px;
+  opacity: 0.92;
+}
+
+/* ---------- User info / Logout ---------- */
+.topbar .userbox {
+  text-align: right;
+}
+.topbar .userbox .email {
+  font-weight: 600;
+  font-size: 14px;
+}
+.topbar .userbox button {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 0;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+}
+.topbar .userbox button:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* =========================================================
+   LAYOUT CONTAINERS
+   ========================================================= */
+.wrapper {
+  max-width: 1180px;
+  margin: 26px auto;
+  padding: 0 18px;
+}
+.container {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 20px;
+  align-items: start;
+}
+
+/* =========================================================
+   PANEL / CARD
+   ========================================================= */
+.panel {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(12,24,60,0.04);
+}
+.panel h2 {
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* =========================================================
+   FORM ELEMENTS
+   ========================================================= */
+.row {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+.row label {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.row input,
+.row select,
+.row textarea {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e6eef8;
+  background: #fbfeff;
+  font-size: 14px;
+  outline: none;
+  transition: box-shadow .12s ease, border-color .12s ease;
+}
+.row input:focus,
+.row select:focus,
+.row textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 6px 18px rgba(11,120,209,0.08);
+}
+.row.three { display: flex; gap: 10px; }
+.row.three > div { flex: 1; display: flex; flex-direction: column; }
+
+/* ---------- Buttons ---------- */
+button, .btn {
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 0;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  transition: transform .08s ease, box-shadow .08s ease;
+  box-shadow: 0 6px 18px rgba(11,120,209,0.09);
+}
+button:hover, .btn:hover { transform: translateY(-1px); }
+button.secondary, .btn.secondary {
+  background: transparent;
+  border: 1px solid rgba(11,120,209,0.15);
+  color: var(--accent);
+  box-shadow: none;
+}
+.actions { display: flex; gap: 10px; margin-top: 8px; }
+.note { color: var(--muted); font-size: 13px; margin-top: 10px; }
+
+/* =========================================================
+   TABLE / LIST VIEW
+   ========================================================= */
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.controls label {
+  font-size: 13px;
+  color: var(--muted);
+}
+.controls input[type="text"], .controls select {
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid #e6eef8;
+  background: #fff;
+}
+
+table.queue {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+table.queue thead th {
+  text-align: left;
+  padding: 12px 10px;
+  color: var(--muted);
+  font-size: 13px;
+  border-bottom: 1px solid #eef4fb;
+}
+table.queue tbody td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #fbfcff;
+}
+table.queue tbody tr:hover {
+  background: rgba(11,120,209,0.03);
+}
+
+/* ---------- Status Tags ---------- */
+.tag {
+  display: inline-block;
+  padding: 6px 9px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.tag.waiting { background: #fff8e6; color: #b46b00; }
+.tag.called  { background: #e8f9ff; color: #05668d; }
+.tag.checked { background: #e8fde9; color: var(--success); }
+
+/* ---------- Table Actions ---------- */
+.action-btn {
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 0;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+.call-btn { background: #ffd29b; color: #6b3b00; }
+.open-btn { background: #a9d6ff; color: #034c6d; }
+.complete-btn { background: var(--success); color: #fff; }
+.remove-btn { background: var(--danger); color: #fff; }
+
+/* =========================================================
+   DOCTOR DETAIL PANEL
+   ========================================================= */
+.detail-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.detail-card .field {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.detail-card .field label {
+  min-width: 110px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+.detail-card .field .value {
+  font-weight: 600;
+  color: var(--text);
+}
+.prescription-area input, .prescription-area textarea {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #eef6fb;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+.history-item {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(12,24,60,0.05);
+  background: #fff;
+  margin-bottom: 8px;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.footer {
+  margin-top: 22px;
+  text-align: center;
+  color: var(--muted);
+  padding: 20px 0;
+  font-size: 13px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 980px) {
+  .container, .split { grid-template-columns: 1fr; padding: 0 12px; }
+  .topbar { padding: 14px 12px; }
+  .detail-card .field label { min-width: 90px; }
+  .row.three { flex-direction: column; }
+}
+
+/* =========================================================
+   LOGIN PAGE STYLES
+   ========================================================= */
+.login-body {
+  background: linear-gradient(145deg, #e8f3ff, #f7fbff);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: #0b1320;
+}
+.login-header {
+  text-align: center;
+  padding: 50px 20px 10px;
+}
+.login-header h1 {
+  color: #0b78d1;
+  font-size: 28px;
+  font-weight: 700;
+}
+.login-header p {
+  margin-top: 8px;
+  color: #546575;
+  font-size: 15px;
+}
+.login-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.login-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 380px;
+  padding: 30px 35px 40px;
+  transition: transform 0.2s ease;
+}
+.login-card:hover {
+  transform: translateY(-2px);
+}
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #0b78d1;
+  font-size: 22px;
+}
+.form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+.form-group label {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #3d4c5a;
+}
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #c9def3;
+  font-size: 15px;
+  outline: none;
+}
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #0b78d1;
+  box-shadow: 0 0 0 2px rgba(11, 120, 209, 0.1);
+}
+.btn {
+  width: 100%;
+  background: linear-gradient(90deg, #0b78d1, #2fa0e6);
+  border: none;
+  padding: 12px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(11, 120, 209, 0.2);
+  transition: all 0.2s ease;
+}
+.btn:hover {
+  background: linear-gradient(90deg, #0a6cbf, #2796d9);
+  transform: translateY(-1px);
+}
+.error-msg {
+  color: #d9534f;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* =========================================================
+   PRINT MODE
+   ========================================================= */
+@media print {
+  .topbar, .actions, .controls, .userbox, .btn, .action-btn { display: none !important; }
+  body { background: #fff; }
+}
+
+/* ==========================
+   Doctor page polish overrides
+   Paste at the END of css/style.css
+   ========================== */
+
+/* ensure main content is centered */
+.wrapper { max-width: 1180px; margin: 28px auto; padding: 0 18px; }
+
+/* tighten topbar: smaller vertical padding and balanced layout */
+.topbar { padding: 12px 20px; }
+.topbar .brand { gap: 10px; align-items: center; }
+.topbar h1 { font-size: 18px; margin-right: 6px; }
+.topbar .subtitle { display: block; font-size: 13px; opacity: .9; margin-top: 3px; }
+
+/* userbox improvements: keep email and logout aligned on same baseline */
+.topbar .userbox { display:flex; flex-direction:row; align-items:center; gap:12px; }
+.topbar .userbox .email { font-size:14px; color: rgba(255,255,255,0.95); font-weight:700; }
+.topbar .userbox button { padding:6px 10px; font-size:13px; margin-top:0; }
+
+/* remove stray left border if any (some browsers show scrollbars overlay) */
+body { background-image: none; }
+
+/* center the doctor layout and ensure consistent padding */
+.split { max-width: 1180px; margin: 20px auto; padding: 0 18px; }
+
+/* make panels a little taller and visually balanced */
+.panel { padding: 20px; border-radius: 14px; }
+
+/* give table container a little more white space */
+.list-panel { min-height: 220px; }
+
+/* nice empty message style: center and muted */
+table.queue tbody tr.empty-row td {
+  text-align:center;
+  color: var(--muted);
+  padding: 36px 12px;
+  font-size:15px;
+}
+
+/* subtle lift on panels to separate them from header */
+.panel { transform: translateY(0); transition: box-shadow .12s ease; }
+.panel:hover { box-shadow: 0 18px 40px rgba(12,24,60,0.06); }
+
+/* sticky patient details: stays visible while scrolling */
+@supports (position: sticky) {
+  #detailPanel { position: sticky; top: 86px; align-self:start; }
+}
+
+/* tighten the detail-card contents spacing */
+.detail-card .field { gap: 10px; }
+.detail-card .field label { min-width: 100px; }
+
+/* make action buttons more compact in table */
+.action-btn { padding: 6px 9px; font-size:13px; }
+
+/* make token badge slightly smaller */
+.token-badge { padding: 6px 8px; font-size:13px; }
+
+/* reduce footer spacing when not needed */
+.footer { margin-top: 36px; }
+
+/* responsive tweaks: ensure sticky doesn't break on small screens */
+@media (max-width:980px) {
+  #detailPanel { position: static; top: auto; }
+  .topbar { padding: 12px; }
+  .topbar h1 { font-size: 17px; }
+}
+
+
+/* ==========================
+   PROFESSIONAL TOPBAR LAYOUT
+   ========================== */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #fff;
+  padding: 14px 24px;
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* Left side (brand + subtitle) */
+.brand h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+.brand .subtitle {
+  margin: 2px 0 0;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+/* Right side (user info + logout) */
+.userbox {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.userbox .email {
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  opacity: 0.95;
+}
+.userbox button {
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+.userbox button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Responsive adjustment */
+@media (max-width: 720px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .userbox {
+    align-self: flex-end;
+  }
+}

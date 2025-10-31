@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Clinic CMS — Receptionist</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+  /* inline test — temporary */
+  body { outline: 6px solid rgba(11,120,209,0.12) !important; }
+  .topbar { outline: 6px dashed rgba(15, 157, 232, 0.12) !important; }
+</style>
+
+</head>
+<body>
+  
+
+  <header class="topbar">
+  <div class="brand">
+    <h1>Clinic CMS — Receptionist</h1>
+        <p class="subtitle">Register patients • Assign tokens • View live queue</p>
+  </div>
+
+  <div class="userbox">
+    <div id="userEmail" style="font-weight:600"></div>
+        <button id="logoutBtn" class="secondary" style="margin-top:6px">Logout</button>
+  </div>
+</header>
+
+
+  <main class="container">
+    <section class="panel form-panel">
+      <h2>Register Patient</h2>
+      <form id="patientForm">
+        <div class="row">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" required />
+        </div>
+
+        <div class="row three">
+          <div>
+            <label for="age">Age</label>
+            <input id="age" name="age" type="number" min="0" required />
+          </div>
+          <div>
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender" required>
+              <option value="">Select</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label for="contact">Contact</label>
+            <input id="contact" name="contact" type="tel" />
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="reason">Reason for visit</label>
+          <input id="reason" name="reason" type="text" />
+        </div>
+
+        <div class="actions">
+          <button type="submit" id="submitBtn">Assign Token & Register</button>
+          <button type="button" id="clearBtn" class="secondary">Clear</button>
+        </div>
+
+        <p class="note">Tokens are assigned automatically and stored in Firebase.</p>
+      </form>
+    </section>
+
+    <section class="panel list-panel">
+      <h2>Live Queue</h2>
+      <div class="controls">
+        <label>Filter:
+          <select id="filterStatus">
+            <option value="all">All</option>
+            <option value="waiting">Waiting</option>
+            <option value="called">Called</option>
+            <option value="checked">Checked</option>
+          </select>
+        </label>
+        <input id="searchBox" placeholder="Search name or token" />
+      </div>
+
+      <table id="queueTable" class="queue">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Patient</th>
+            <th>Age</th>
+            <th>Contact</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="queueBody">
+          <!-- live rows -->
+        </tbody>
+      </table>
+      <p id="noRecords" class="muted">No patients yet.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>Clinic CMS • Receptionist • Built with HTML/CSS/JS & Firebase</small>
+  </footer>
+
+  <!-- Firebase (compat) CDN -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+  <!-- your firebase config (must include firebase.initializeApp(...)) -->
+  <script src="js/firebase-config.js"></script>
+
+  <!-- receptionist logic (provided earlier). If you don't have it yet, use js/receptionist.js -->
+  <script src="js/receptionist.js"></script>
+
+  <script>
+    // small auth helpers: show user email and logout
+    const auth = firebase.auth();
+    const userEmailEl = document.getElementById('userEmail');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        userEmailEl.textContent = user.email || 'Signed in';
+      } else {
+        // if not signed in, redirect to login (index.html)
+        window.location.href = 'index.html';
+      }
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      auth.signOut().then(()=> window.location.href='index.html');
+    });
+  </script>
+</body>
+</html>

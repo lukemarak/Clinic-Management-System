@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clinic Management System – Login</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="login-body">
+  <header class="login-header">
+    <h1>🏥 Clinic Management System</h1>
+    <p>Doctor & Receptionist Collaboration Portal</p>
+  </header>
+
+  <main class="login-container">
+    <div class="login-card">
+      <h2>Login</h2>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="role">Select Role</label>
+          <select id="role" required>
+            <option value="">-- Select --</option>
+            <option value="doctor">Doctor</option>
+            <option value="receptionist">Receptionist</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Enter email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter password" required />
+        </div>
+
+        <button type="submit" class="btn">Login</button>
+        <p id="errorMsg" class="error-msg"></p>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <small>© 2025 Clinic Management System • HTML • CSS • JS • Firebase</small>
+  </footer>
+
+  <!-- Firebase scripts -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+
+  <!-- login script (if you have one) -->
+  <script src="js/login.js"></script>
+</body>
+</html>
