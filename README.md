@@ -12,13 +12,13 @@
 
 ## 🔑 Login Credentials (Demo Accounts)
 
-<!-- **👨‍⚕️ Doctor Login**  
-Email: doctor@cms.com  
-Password: 123456 
+**👨‍⚕️ Doctor Login**  
+///Email: doctor@cms.com  
+///Password: 123456 
 
 **👩‍💼 Receptionist Login**  
-Email: receptionist@cms.com  
-Password: 7654321   -->
+///Email: receptionist@cms.com  
+///Password: 7654321  
 
 > ⚠️ These demo credentials are for testing purposes only.
 
