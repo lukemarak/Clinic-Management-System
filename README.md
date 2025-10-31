@@ -5,6 +5,24 @@
 
 ---
 
+## 🌐 Live Demo
+[Visit Clinic Management System](https://trinityss.in)
+-> This domain will expire on Feb-2026
+---
+
+## 🔑 Login Credentials (Demo Accounts)
+
+**👨‍⚕️ Doctor Login**  
+Email: doctor@cms.com  
+Password: 123456 
+
+**👩‍💼 Receptionist Login**  
+Email: receptionist@cms.com  
+Password: 7654321  
+
+> ⚠️ These demo credentials are for testing purposes only.
+
+
 ## 🩺 Problem Statement
 
 The **Work Assistance Program “Direction”** is a web-based system designed to simplify communication between a **doctor** and a **receptionist** in a clinic.  
@@ -14,6 +32,7 @@ Traditionally, doctors and receptionists manually manage patient data, tokens, a
 This project automates that process with a simple, cloud-connected system.
 
 ---
+
 
 ## 🎯 Objective
 
